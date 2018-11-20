@@ -44,11 +44,13 @@ class GCDViewController: UIViewController {
         
         // 串行队列做异步操作是顺序执行
         queue.async {
+            print(Thread.current)
             for i in 0 ..< 2 {
                 print("First i: \(i)")
             }
         }
         queue.async {
+            print(Thread.current)
             for i in 0 ..< 2 {
                 print("Second i: \(i)")
             }
@@ -266,7 +268,7 @@ class GCDViewController: UIViewController {
         queue.async {
             semaphore.wait()
             print("First car in.")
-            sleep(2)
+            sleep(3)
             print("First car out.")
             semaphore.signal()
         }
@@ -274,7 +276,7 @@ class GCDViewController: UIViewController {
         queue.async {
             semaphore.wait()
             print("Second car in.")
-            sleep(3)
+            sleep(2)
             print("Second car out.")
             semaphore.signal()
         }
